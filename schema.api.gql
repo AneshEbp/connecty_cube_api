@@ -1,0 +1,43 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type LoginResponse {
+  connectySession: String
+  message: String!
+  token: String
+  user: UserType
+}
+
+input LoginUserDto {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  login(body: LoginUserDto!): LoginResponse!
+  register(body: UserRegisterInput!): UserResgisterResponse!
+}
+
+type Query {
+  hello: String!
+}
+
+input UserRegisterInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+}
+
+type UserResgisterResponse {
+  message: String!
+  user: UserType!
+}
+
+type UserType {
+  email: String!
+  firstName: String!
+  id: String!
+  lastName: String!
+}
