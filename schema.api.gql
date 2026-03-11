@@ -3,6 +3,7 @@
 # ------------------------------------------------------
 
 type LoginResponse {
+  ccUserId: Float
   connectySession: String
   message: String!
   token: String
@@ -16,6 +17,7 @@ input LoginUserDto {
 
 type Mutation {
   login(body: LoginUserDto!): LoginResponse!
+  login_By_token(body: LoginUserDto!): LoginResponse!
   register(body: UserRegisterInput!): UserResgisterResponse!
 }
 

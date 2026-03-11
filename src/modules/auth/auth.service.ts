@@ -40,6 +40,9 @@ export class AuthService {
       });
 
       const savedUser = await createdUser.save({ session });
+
+      //uncomment this if you are using email password login to connecty cube
+
       const userProfile = {
         email: savedUser.email,
         password: body.password,
@@ -115,6 +118,46 @@ export class AuthService {
       },
       token,
       connectySession: session.session?.token,
+    };
+  }
+
+  async login_with_Connecty_by_token(body: LoginUserDto) {
+    const user = await this.userModel.findOne({ email: body.email });
+    if (!user) {
+      throw new UnauthorizedException('Invalid email or password');
+    }
+
+    // 2️⃣ Compare password
+    const isPasswordValid = await bcrypt.compare(body.password, user.password);
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Invalid email or password');
+    }
+
+    // 3️⃣ Generate JWT token
+    const payload = { id: user._id, email: user.email };
+    const token = this.jwtService.sign(payload);
+    // session from ConnectyCube
+
+    const session =
+      await this.connectySdk.CreateCCSession_by_System_token(token);
+
+    if (!user.connectyCubeId) {
+      console.log('connecty cube is saved');
+      user.connectyCubeId = session.connectyId;
+      await user.save();
+    }
+
+    return {
+      message: 'Login successful',
+      user: {
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+      },
+      token,
+      connectySession: session.sessionToken,
+      ccUserId: Number(session.connectyId)
     };
   }
 }

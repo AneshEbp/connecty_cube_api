@@ -21,4 +21,11 @@ export class AuthResolver {
     console.log(result);
     return result;
   }
+
+  //this directly login to connecty cube by system generated token by CIP
+  @Mutation(() => LoginResponse)
+  async login_By_token(@Args('body') body: LoginUserDto) {
+    const result = await this.authService.login_with_Connecty_by_token(body);
+    return result;
+  }
 }

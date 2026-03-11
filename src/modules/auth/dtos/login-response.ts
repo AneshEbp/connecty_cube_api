@@ -12,6 +12,9 @@ export class LoginResponse {
   @Field({ nullable: true })
   connectySession?: String;
 
+  @Field({ nullable: true })
+  ccUserId?: number;
+
   @Field(() => UserType, { nullable: true })
   user?: UserType;
 }

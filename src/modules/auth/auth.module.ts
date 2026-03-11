@@ -7,6 +7,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtGqlStrategy } from './strategy/jwt.strategy';
 import { ConnectyCubeService } from './connectyCube.service';
+import { AuthController } from './auth.controller';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ConnectyCubeService } from './connectyCube.service';
       }),
     }),
   ],
+  controllers: [AuthController],
   providers: [AuthService, AuthResolver, JwtGqlStrategy, ConnectyCubeService],
 })
 export class AuthModule {}

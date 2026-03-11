@@ -25,6 +25,6 @@ export class JwtGqlStrategy extends PassportStrategy(Strategy, 'jwt') {
 
   async validate(payload: any) {
     // This object will be available in @Context().req.user or @Context().user
-    return { userId: payload.sub, email: payload.email };
+    return { userId: payload.id, email: payload.email };
   }
 }
