@@ -15,7 +15,6 @@ export class ConnectyCubeService {
   }
 
   async registerConnecty(data) {
-    console.log('i m at connecty:', data);
     try {
       const user = await connectyCube.users.signup(data);
       return { success: true, user };
@@ -28,7 +27,6 @@ export class ConnectyCubeService {
   async createSession(data) {
     try {
       const session = await connectyCube.createSession(data);
-      console.log('session fetched');
       return {
         session,
       };

@@ -31,7 +31,6 @@ export class AuthService {
         throw new ConflictException('Email already exists'); // Use NestJS exception
       }
 
-      console.log('i m at register Service');
       const hashedPassword = await bcrypt.hash(body.password, 10);
 
       const createdUser = new this.userModel({
@@ -99,13 +98,9 @@ export class AuthService {
     // 3️⃣ Generate JWT token
     const payload = { id: user._id, email: user.email };
     const token = this.jwtService.sign(payload);
-    console.log('token:' + token);
     // session from ConnectyCube
 
     const session = await this.connectySdk.createSession(body);
-    if (session.session) {
-      console.log(session.session);
-    }
 
     // 4️⃣ Return user info + token
     return {
@@ -142,7 +137,6 @@ export class AuthService {
       await this.connectySdk.CreateCCSession_by_System_token(token);
 
     if (!user.connectyCubeId) {
-      console.log('connecty cube is saved');
       user.connectyCubeId = session.connectyId;
       await user.save();
     }

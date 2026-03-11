@@ -18,7 +18,6 @@ export class AuthResolver {
   @Mutation(() => LoginResponse)
   async login(@Args('body') body: LoginUserDto) {
     const result = await this.authService.login(body);
-    console.log(result);
     return result;
   }
 
