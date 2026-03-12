@@ -1,6 +1,6 @@
 # ConnectyCube API (NestJS)
 
-A lightweight NestJS GraphQL backend for ConnectyCube apps. This GraphQL API provides secure user registration and authentication backed by MongoDB and ConnectyCube, making it easy to build chat/RTC apps with a ConnectyCube server-side auth flow.
+A lightweight **NestJS GraphQL backend for ConnectyCube apps**. This GraphQL API provides **secure user registration, authentication and real-time chat** backed by **MongoDB** and **ConnectyCube**, making it easy to build **chat apps, messaging apps, and RTC applications** with a ConnectyCube server-side auth flow.
 
 ## ✅ What this project does
 
